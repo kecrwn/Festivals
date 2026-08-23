@@ -17,11 +17,6 @@ import {
 } from "lucide-react";
 import { useMemo, useState } from "react";
 
-const heroImage = "/manus-storage/festival-atlas-hero_c4c9e83d.jpg";
-const indiaImage = "/manus-storage/festival-atlas-india_a4f50e84.jpg";
-const indonesiaImage = "/manus-storage/festival-atlas-indonesia_c6b314fd.jpg";
-const markImage = "/manus-storage/festival-atlas-mark_b248957f.png";
-
 type CountryFilter = "All" | Country;
 type TraditionFilter = "All" | Tradition;
 
@@ -59,6 +54,10 @@ function CountryDot({ country }: { country: Country }) {
   return <span aria-hidden="true" className={`country-dot ${country.toLowerCase()}`} />;
 }
 
+function AtlasMark({ className = "" }: { className?: string }) {
+  return <span aria-hidden="true" className={`atlas-mark ${className}`} />;
+}
+
 function FestivalCard({ festival, onOpen }: { festival: Festival; onOpen: (festival: Festival) => void }) {
   return (
     <button className={`festival-card ${festival.country.toLowerCase()} ${festival.featured ? "featured-card" : ""}`} onClick={() => onOpen(festival)}>
@@ -83,7 +82,7 @@ function SpotlightCard({ country, count }: { country: Country; count: number }) 
   const isIndia = country === "India";
   return (
     <article className={`spotlight-card ${country.toLowerCase()}`}>
-      <img src={isIndia ? indiaImage : indonesiaImage} alt="" />
+      <div className="spotlight-art" aria-hidden="true"><span className="art-sun" /><span className="art-textile" /><span className="art-paper" /></div>
       <div className="spotlight-scrim" />
       <div className="spotlight-content">
         <span className="eyebrow inverse"><CountryDot country={country} /> {country} collection</span>
@@ -151,7 +150,7 @@ export default function Home() {
     <main className="atlas-page">
       <header className="site-header">
         <a href="#top" className="brand" aria-label="Festival Atlas, beginning of page">
-          <img src={markImage} alt="" className="brand-mark" />
+          <AtlasMark className="brand-mark" />
           <span className="brand-lockup"><span>Festival</span><strong>Atlas</strong></span>
         </a>
         <nav className="top-nav" aria-label="Primary navigation">
@@ -178,8 +177,8 @@ export default function Home() {
           </div>
         </div>
         <div className="hero-visual" aria-label="Festival Atlas field journal with cultural calendar materials">
-          <img src={heroImage} alt="Open cultural calendar journal with batik, brass compass, marigold petals and clay lamps" />
-          <div className="hero-stamp"><img src={markImage} alt="" /><span>Living cultural<br />calendar</span></div>
+          <div className="hero-paper-art" aria-hidden="true"><span className="paper-contours" /><span className="paper-calendar" /><span className="paper-textile" /><span className="paper-lamp" /></div>
+          <div className="hero-stamp"><AtlasMark /><span>Living cultural<br />calendar</span></div>
           <div className="hero-caption"><span>FIELD NOTE 01</span><strong>Follow the seasons,<br />not just the dates.</strong></div>
         </div>
       </section>
@@ -261,7 +260,7 @@ export default function Home() {
       </section>
 
       <footer className="site-footer" id="sources">
-        <div className="footer-brand"><img src={markImage} alt="" /><div><span>Festival Atlas</span><p>A living field guide for India and Indonesia.</p></div></div>
+        <div className="footer-brand"><AtlasMark /><div><span>Festival Atlas</span><p>A living field guide for India and Indonesia.</p></div></div>
         <div className="footer-source"><strong>Reference notes</strong><p>This editorial index is for discovery, not a statutory holiday or travel-planning service. Indonesia’s 2026 public-date examples follow <a href="https://www.bi.go.id/en/publikasi/Kalender/Documents/Holidays-And-Collective-Leaves-In-2026.pdf" target="_blank" rel="noreferrer">Bank Indonesia’s calendar</a>; national-day context is cross-checked with the <a href="https://www.india.gov.in/" target="_blank" rel="noreferrer">National Portal of India</a>.</p></div>
       </footer>
 
