@@ -1,0 +1,13 @@
+{
+  "name": "KA Festivals — India & Indonesia Calendar",
+  "short_name": "KA Festivals",
+  "description": "A bilingual cultural calendar for India and Indonesia.",
+  "lang": "id",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7f4ed",
+  "theme_color": "#15314b",
+  "icons": [
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

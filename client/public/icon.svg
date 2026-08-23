@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" role="img" aria-label="KA Festivals">
+  <rect width="192" height="192" rx="42" fill="#15314b"/>
+  <g fill="#e5952f"><path d="M96 25l8 37-8 15-8-15z"/><path d="M167 96l-37 8-15-8 15-8z"/><path d="M96 167l-8-37 8-15 8 15z"/><path d="M25 96l37-8 15 8-15 8z"/><path d="M146 46l-18 33-16 5 5-16z"/><path d="M146 146l-33-18-5-16 16 5z"/><path d="M46 146l18-33 16-5-5 16z"/><path d="M46 46l33 18 5 16-16-5z"/></g>
+  <circle cx="96" cy="96" r="35" fill="#f7f4ed"/><circle cx="96" cy="96" r="19" fill="#e5952f"/>
+  <text x="96" y="154" text-anchor="middle" fill="#f7f4ed" font-family="serif" font-size="30" font-weight="700">KA</text>
+</svg>

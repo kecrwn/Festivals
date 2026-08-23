@@ -1,274 +1,99 @@
-/**
- * Saffron Field Notes: a warm editorial almanac with an asymmetric country rail,
- * ink-blue typography, paper texture, Atlas Saffron selections, and annotated field cards.
- */
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { festivals, monthNames, type Country, type Festival, type Tradition } from "@/data/festivals";
-import {
-  ArrowUpRight,
-  BookOpenText,
-  CalendarDays,
-  ChevronRight,
-  Compass,
-  MapPinned,
-  Search,
-  SlidersHorizontal,
-  X,
-} from "lucide-react";
-import { useMemo, useState } from "react";
+/** KA Festivals: a bilingual daily companion with a calm field-journal interface, timezone-aware clocks, and a tiny CSS-drawn cat. */
+import { calendarRecords, kindColor, type Country, type FestivalRecord, type Kind, type Locale } from "@/data/calendar";
+import { Bell, BellOff, CalendarCheck2, Cat, Check, ChevronDown, Clock3, Download, Globe2, Info, Languages, MapPin, Search, Sparkles, X } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
 
+type InstallPromptEvent = Event & { prompt: () => Promise<void>; userChoice: Promise<{ outcome: "accepted" | "dismissed" }> };
 type CountryFilter = "All" | Country;
-type TraditionFilter = "All" | Tradition;
 
-const globalTraditions: Tradition[] = ["National", "Special day", "Hindu", "Islamic", "Sikh", "Christian", "Buddhist", "Jain", "Confucian", "Cultural"];
+const copy = {
+  id: { navDaily: "Hari ini", navCalendar: "Kalender", navGuide: "Panduan", install: "Pasang aplikasi", dailyKicker: "Pendamping hari ini", heading: "Rayakan hari ini, dengan konteks yang hangat.", intro: "KA Festivals menunjukkan perayaan yang berlangsung hari ini di India dan Indonesia—dengan bahasa yang santai, jelas, dan mudah dibaca.", dateLabel: "Pilih tanggal", countryLabel: "Wilayah", allCountries: "Semua negara", india: "India", indonesia: "Indonesia", today: "Hari ini", noFestival: "Tidak ada festival terjadwal hari ini.", noFestivalDesc: "Hari ini tenang di kalender pilihanmu. Mika menyarankan untuk melihat perayaan berikutnya.", festivalToday: "Ada perayaan hari ini", casualNote: "Apa yang biasanya terjadi?", clockTitle: "Jam lokal sekarang", yearKicker: "Kalender 2026–2030", yearHeading: "Jelajahi lima tahun, satu hari dalam satu waktu.", yearNote: "Tanggal resmi dan perkiraan ditandai agar kamu tahu mana yang perlu dicek ulang.", verified: "Terverifikasi", estimate: "Perkiraan", review: "Menunggu pengumuman resmi", sourceNote: "Tanggal lunar, Hijriah, Saka, Pawukon, dan hari libur pemerintah bisa berubah. Selalu cek pengumuman lokal sebelum membuat rencana.", searchPlaceholder: "Cari festival atau hari penting", result: "catatan kalender", todayShortcut: "Kembali ke hari ini", notificationTitle: "Pengingat festival", enableNotifications: "Aktifkan pengingat", disableNotifications: "Matikan pengingat", notificationReady: "Pengingat aktif saat aplikasi dibuka atau kembali aktif.", notificationBlocked: "Notifikasi diblokir di browser. Ubah izin situs untuk mengaktifkannya.", notificationUnsupported: "Browser ini belum mendukung notifikasi.", notificationCaveat: "Versi statis ini tidak dapat menjamin notifikasi saat browser benar-benar tertutup. Saat aplikasi terbuka atau dibuka kembali di hari festival, pengingat akan muncul.", pwaInstalled: "Aplikasi sudah terpasang", pwaReady: "Pasang KA Festivals untuk akses cepat dan tampilan seperti aplikasi.", language: "Bahasa", loadMore: "Tampilkan lebih banyak", futureIndo: "Tanggal hari libur keagamaan Indonesia untuk tahun ini menunggu keputusan resmi. Hari tetap dan hari budaya tetap ditampilkan.", metadata: "Kalender budaya India dan Indonesia, hari penting, zona waktu, dan pengingat festival." },
+  en: { navDaily: "Today", navCalendar: "Calendar", navGuide: "Guide", install: "Install app", dailyKicker: "Today’s companion", heading: "Celebrate today, with gentle context.", intro: "KA Festivals shows what is happening today in India and Indonesia—using warm, clear, everyday language.", dateLabel: "Choose a date", countryLabel: "Region", allCountries: "Both countries", india: "India", indonesia: "Indonesia", today: "Today", noFestival: "No festival is scheduled today.", noFestivalDesc: "Today is quiet in your selected calendar. Mika suggests checking the next celebration.", festivalToday: "There is a celebration today", casualNote: "What usually happens?", clockTitle: "Local time now", yearKicker: "Calendar 2026–2030", yearHeading: "Explore five years, one day at a time.", yearNote: "Official and estimated dates are marked so you know what needs a local check.", verified: "Verified", estimate: "Estimated", review: "Awaiting official announcement", sourceNote: "Lunar, Hijri, Saka, Pawukon and government dates can move. Always confirm local announcements before making plans.", searchPlaceholder: "Search a festival or special day", result: "calendar notes", todayShortcut: "Return to today", notificationTitle: "Festival reminders", enableNotifications: "Enable reminders", disableNotifications: "Turn reminders off", notificationReady: "Reminders are active while the app is open or resumes.", notificationBlocked: "Notifications are blocked in this browser. Change this site’s permission to turn them on.", notificationUnsupported: "This browser does not support notifications.", notificationCaveat: "A static website cannot guarantee alerts while the browser is fully closed. When the app is open or resumed on a festival day, a reminder will appear.", pwaInstalled: "App installed", pwaReady: "Install KA Festivals for quick, app-like access.", language: "Language", loadMore: "Show more", futureIndo: "Indonesia’s official religious public-holiday dates for this year are awaiting government announcement. Fixed and cultural dates remain available.", metadata: "An India and Indonesia cultural calendar with special days, time zones and festival reminders." }
+} as const;
 
-function formatCount(count: number) {
-  return `${count} field ${count === 1 ? "note" : "notes"}`;
+const zoneList = [{ label: "India · IST", zone: "Asia/Kolkata", country: "India" }, { label: "Indonesia · WIB", zone: "Asia/Jakarta", country: "Indonesia" }, { label: "Indonesia · WITA", zone: "Asia/Makassar", country: "Indonesia" }, { label: "Indonesia · WIT", zone: "Asia/Jayapura", country: "Indonesia" }];
+const kindLabels: Record<Locale, Record<Kind, string>> = { id: { National: "Nasional", Hindu: "Hindu", Islamic: "Islam", Sikh: "Sikh", Christian: "Kristen", Buddhist: "Buddha", Jain: "Jain", Confucian: "Konghucu", Cultural: "Budaya", Special: "Hari penting" }, en: { National: "National", Hindu: "Hindu", Islamic: "Islamic", Sikh: "Sikh", Christian: "Christian", Buddhist: "Buddhist", Jain: "Jain", Confucian: "Confucian", Cultural: "Cultural", Special: "Special day" } };
+
+function zonedDate(timeZone: string) {
+  const parts = new Intl.DateTimeFormat("en-CA", { timeZone, year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(new Date());
+  const get = (type: string) => parts.find((item) => item.type === type)?.value || "";
+  return `${get("year")}-${get("month")}-${get("day")}`;
 }
 
-function markFor(tradition: Tradition) {
-  const labels: Record<Tradition, string> = {
-    Hindu: "H",
-    Islamic: "M",
-    Sikh: "S",
-    Christian: "C",
-    Buddhist: "B",
-    Jain: "J",
-    Confucian: "K",
-    National: "N",
-    Cultural: "R",
-    "Special day": "D",
-  };
-  return labels[tradition];
+function longDate(value: string, language: Locale, timeZone = "Asia/Jakarta") {
+  return new Intl.DateTimeFormat(language === "id" ? "id-ID" : "en-GB", { weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone }).format(new Date(`${value}T12:00:00Z`));
 }
 
-function traditionLabel(tradition: Tradition, country: CountryFilter) {
-  if (country === "Indonesia" && tradition === "Islamic") return "Muslim traditions";
-  if (tradition === "National") return "National dates";
-  if (tradition === "Special day") return "Special days";
-  if (tradition === "Cultural") return "Cultural / regional";
-  return tradition;
+function Clock({ label, zone }: { label: string; zone: string }) {
+  const [now, setNow] = useState(() => new Date());
+  useEffect(() => { const timer = window.setInterval(() => setNow(new Date()), 1000); return () => window.clearInterval(timer); }, []);
+  return <div className="zone-clock"><span>{label}</span><strong>{new Intl.DateTimeFormat("en-GB", { timeZone: zone, hour: "2-digit", minute: "2-digit", second: "2-digit", hourCycle: "h23" }).format(now)}</strong></div>;
 }
 
-function CountryDot({ country }: { country: Country }) {
-  return <span aria-hidden="true" className={`country-dot ${country.toLowerCase()}`} />;
+function CatCompanion({ hasFestival, language }: { hasFestival: boolean; language: Locale }) {
+  return <div className={`mika ${hasFestival ? "celebrating" : "resting"}`} aria-label="Mika, the KA Festivals cat companion"><div className="cat-tail" /><div className="cat-body" /><div className="cat-head"><i className="ear left" /><i className="ear right" /><i className="eye left" /><i className="eye right" /><i className="nose" /></div><div className="mika-copy"><Cat size={15} /><span>{hasFestival ? (language === "id" ? "Mika sedang ikut merayakan." : "Mika is joining the celebration.") : (language === "id" ? "Mika menikmati hari yang tenang." : "Mika is enjoying a quiet day.")}</span></div></div>;
 }
 
-function AtlasMark({ className = "" }: { className?: string }) {
-  return <span aria-hidden="true" className={`atlas-mark ${className}`} />;
+function casualDescription(record: FestivalRecord, language: Locale) {
+  const templates = {
+    id: { National: "Hari penting ini biasanya diisi dengan upacara, cerita sejarah, dan kegiatan bersama di banyak tempat.", Hindu: "Biasanya ada doa, dekorasi, makanan khas, dan waktu bersama keluarga atau komunitas.", Islamic: "Banyak orang berkumpul untuk berdoa, berbagi makanan, dan saling mengunjungi dengan hangat.", Sikh: "Perayaan ini sering diisi dengan kunjungan ke gurdwara, musik rohani, dan kegiatan berbagi.", Christian: "Komunitas biasanya berkumpul untuk ibadah, refleksi, musik, dan waktu bersama keluarga.", Buddhist: "Hari ini sering diisi dengan meditasi, kunjungan ke vihara, dan tindakan kebaikan.", Jain: "Perayaan ini mengajak refleksi, doa, dan praktik welas asih atau tanpa kekerasan.", Confucian: "Keluarga, makanan bersama, doa, dan harapan baik menjadi bagian penting dari hari ini.", Cultural: "Ini adalah momen budaya yang sering hadir lewat seni, makanan, tradisi lokal, dan kebersamaan.", Special: "Hari ini menjadi kesempatan untuk belajar, menghargai tokoh penting, dan mengikuti kegiatan komunitas." },
+    en: { National: "This day is often marked with ceremonies, history, and shared community activities.", Hindu: "People often gather for prayer, decorations, special food, and time with family or community.", Islamic: "Many people gather to pray, share food, and visit one another with warmth.", Sikh: "The day often includes gurdwara visits, devotional music, and acts of sharing.", Christian: "Communities commonly gather for worship, reflection, music, and family time.", Buddhist: "The day is often observed with meditation, temple visits, and acts of kindness.", Jain: "This observance invites reflection, prayer, and practices of compassion or non-violence.", Confucian: "Family, shared food, prayer, and good wishes are central to the day.", Cultural: "This cultural moment often comes alive through art, food, local tradition, and togetherness.", Special: "It is a chance to learn, appreciate an important figure, and join community activity." }
+  } as const;
+  return templates[language][record.kind];
 }
 
-function FestivalCard({ festival, onOpen }: { festival: Festival; onOpen: (festival: Festival) => void }) {
-  return (
-    <button className={`festival-card ${festival.country.toLowerCase()} ${festival.featured ? "featured-card" : ""}`} onClick={() => onOpen(festival)}>
-      <span className={`tradition-mark ${festival.tradition.toLowerCase().replaceAll(" ", "-")}`}>{markFor(festival.tradition)}</span>
-      <span className="festival-card-body">
-        <span className="festival-card-topline">
-          <span className="festival-timing">{festival.timing}</span>
-          <span className="festival-country"><CountryDot country={festival.country} />{festival.country}</span>
-        </span>
-        <span className="festival-title-row">
-          <span className="festival-title">{festival.name}</span>
-          <ChevronRight size={18} strokeWidth={1.8} aria-hidden="true" />
-        </span>
-        <span className="festival-subtitle"><span className={`heritage-dash ${festival.tradition.toLowerCase().replaceAll(" ", "-")}`} />{festival.localName || traditionLabel(festival.tradition, festival.country)}</span>
-        <span className="festival-description">{festival.description}</span>
-      </span>
-    </button>
-  );
-}
-
-function SpotlightCard({ country, count }: { country: Country; count: number }) {
-  const isIndia = country === "India";
-  return (
-    <article className={`spotlight-card ${country.toLowerCase()}`}>
-      <div className="spotlight-art" aria-hidden="true"><span className="art-sun" /><span className="art-textile" /><span className="art-paper" /></div>
-      <div className="spotlight-scrim" />
-      <div className="spotlight-content">
-        <span className="eyebrow inverse"><CountryDot country={country} /> {country} collection</span>
-        <h3>{isIndia ? "A country of many calendars." : "Plural traditions, shared public life."}</h3>
-        <p>{count} curated notes across national, cultural and religious observances.</p>
-      </div>
-    </article>
-  );
-}
+function statusLabel(status: FestivalRecord["status"], language: Locale) { return copy[language][status]; }
 
 export default function Home() {
+  const [language, setLanguage] = useState<Locale>(() => (localStorage.getItem("ka-locale") as Locale) || "id");
   const [country, setCountry] = useState<CountryFilter>("All");
-  const [tradition, setTradition] = useState<TraditionFilter>("All");
-  const [month, setMonth] = useState<number | null>(null);
+  const [selectedDate, setSelectedDate] = useState(() => zonedDate("Asia/Jakarta"));
   const [query, setQuery] = useState("");
-  const [selected, setSelected] = useState<Festival | null>(null);
-  const [showAll, setShowAll] = useState(false);
+  const [limit, setLimit] = useState(18);
+  const [installPrompt, setInstallPrompt] = useState<InstallPromptEvent | null>(null);
+  const [installed, setInstalled] = useState(false);
+  const [reminders, setReminders] = useState(() => localStorage.getItem("ka-reminders") === "true");
+  const [notificationState, setNotificationState] = useState<NotificationPermission | "unsupported">(() => "Notification" in window ? Notification.permission : "unsupported");
+  const t = copy[language];
+  const year = Number(selectedDate.slice(0, 4));
 
-  const indiaCount = festivals.filter((festival) => festival.country === "India").length;
-  const indonesiaCount = festivals.filter((festival) => festival.country === "Indonesia").length;
+  useEffect(() => { localStorage.setItem("ka-locale", language); document.documentElement.lang = language; document.title = language === "id" ? "KA Festivals — Kalender Perayaan India & Indonesia" : "KA Festivals — India & Indonesia Festival Calendar"; const meta = document.querySelector('meta[name="description"]'); if (meta) meta.setAttribute("content", t.metadata); }, [language, t.metadata]);
+  useEffect(() => { if ("serviceWorker" in navigator) navigator.serviceWorker.register("/sw.js").catch(() => undefined); const handler = (event: Event) => { event.preventDefault(); setInstallPrompt(event as InstallPromptEvent); }; window.addEventListener("beforeinstallprompt", handler); window.addEventListener("appinstalled", () => { setInstalled(true); setInstallPrompt(null); }); return () => window.removeEventListener("beforeinstallprompt", handler); }, []);
 
-  const availableTraditions = useMemo(() => {
-    const permitted = country === "All" ? festivals : festivals.filter((festival) => festival.country === country);
-    return globalTraditions.filter((entry) => permitted.some((festival) => festival.tradition === entry));
-  }, [country]);
+  const dayRecords = useMemo(() => calendarRecords.filter((entry) => entry.date === selectedDate && (country === "All" || entry.country === country)), [selectedDate, country]);
+  const calendarResults = useMemo(() => calendarRecords.filter((entry) => entry.date.slice(0, 4) === String(year) && (country === "All" || entry.country === country) && [entry.title.en, entry.title.id, entry.kind, entry.country].join(" ").toLowerCase().includes(query.trim().toLowerCase())).sort((a, b) => a.date.localeCompare(b.date)), [country, query, year]);
+  const isToday = selectedDate === zonedDate("Asia/Jakarta");
 
-  const filteredFestivals = useMemo(() => {
-    const needle = query.trim().toLocaleLowerCase();
-    return festivals.filter((festival) => {
-      const matchCountry = country === "All" || festival.country === country;
-      const matchTradition = tradition === "All" || festival.tradition === tradition;
-      const matchMonth = month === null || festival.month === month;
-      const haystack = [festival.name, festival.localName, festival.country, festival.tradition, festival.region, festival.description].filter(Boolean).join(" ").toLocaleLowerCase();
-      return matchCountry && matchTradition && matchMonth && (!needle || haystack.includes(needle));
-    });
-  }, [country, tradition, month, query]);
+  useEffect(() => {
+    if (!reminders || notificationState !== "granted") return;
+    const notify = async () => {
+      const indiaToday = zonedDate("Asia/Kolkata"); const indonesiaToday = zonedDate("Asia/Jakarta");
+      const matches = calendarRecords.filter((entry) => (entry.country === "India" ? entry.date === indiaToday : entry.date === indonesiaToday) && entry.status !== "review");
+      for (const entry of matches.slice(0, 2)) { const key = `ka-notified-${entry.id}`; if (localStorage.getItem(key)) continue; const title = language === "id" ? `${entry.title.id} hari ini` : `${entry.title.en} today`; try { if (navigator.serviceWorker?.controller) { const registration = await navigator.serviceWorker.ready; await registration.showNotification(title, { body: casualDescription(entry, language), icon: "/icon.svg", tag: entry.id }); } else { new Notification(title, { body: casualDescription(entry, language), icon: "/icon.svg" }); } localStorage.setItem(key, "yes"); } catch { /* browser permission or platform policy handles this */ } }
+    };
+    notify(); const timer = window.setInterval(notify, 60_000); return () => window.clearInterval(timer);
+  }, [language, notificationState, reminders]);
 
-  const displayedFestivals = showAll ? filteredFestivals : filteredFestivals.slice(0, 18);
-  const groupedFestivals = useMemo(() => {
-    const groups = new Map<number, Festival[]>();
-    [...displayedFestivals]
-      .sort((a, b) => a.month - b.month || a.country.localeCompare(b.country) || a.name.localeCompare(b.name))
-      .forEach((festival) => groups.set(festival.month, [...(groups.get(festival.month) || []), festival]));
-    return Array.from(groups.entries());
-  }, [displayedFestivals]);
-  const featured = festivals.filter((festival) => festival.featured && (country === "All" || festival.country === country)).slice(0, 3);
-  const filterActive = country !== "All" || tradition !== "All" || month !== null || query.trim().length > 0;
+  const switchLanguage = () => setLanguage((current) => current === "id" ? "en" : "id");
+  const enableReminders = async () => { if (!("Notification" in window)) { setNotificationState("unsupported"); return; } const permission = await Notification.requestPermission(); setNotificationState(permission); if (permission === "granted") { setReminders(true); localStorage.setItem("ka-reminders", "true"); } };
+  const disableReminders = () => { setReminders(false); localStorage.setItem("ka-reminders", "false"); };
+  const install = async () => { if (!installPrompt) return; await installPrompt.prompt(); await installPrompt.userChoice; setInstallPrompt(null); };
+  const dateChange = (value: string) => { setSelectedDate(value); setLimit(18); };
 
-  function resetFilters() {
-    setCountry("All");
-    setTradition("All");
-    setMonth(null);
-    setQuery("");
-    setShowAll(false);
-  }
+  return <main className="ka-page">
+    <header className="ka-header"><a className="ka-brand" href="#top" aria-label="KA Festivals"><span className="ka-letter k">K</span><span className="ka-letter a">A</span><span className="festival-word">Festivals</span></a><nav><a href="#today">{t.navDaily}</a><a href="#calendar">{t.navCalendar}</a><a href="#guide">{t.navGuide}</a></nav><div className="header-tools"><button className="language-toggle" onClick={switchLanguage} aria-label={`${t.language}: ${language === "id" ? "English" : "Bahasa Indonesia"}`}><Languages size={15}/><span className={language === "id" ? "active" : ""}>ID</span><i/><span className={language === "en" ? "active" : ""}>EN</span></button>{(installPrompt || installed) && <button className="install-button" onClick={install} disabled={installed}>{installed ? <Check size={15}/> : <Download size={15}/>} {installed ? t.pwaInstalled : t.install}</button>}</div></header>
 
-  function selectCountry(nextCountry: CountryFilter) {
-    setCountry(nextCountry);
-    setTradition("All");
-    setMonth(null);
-    setShowAll(false);
-  }
+    <section className="ka-hero" id="top"><div className="hero-text"><span className="section-label"><Sparkles size={14}/> {t.dailyKicker}</span><h1>{t.heading}</h1><p>{t.intro}</p><div className="date-row"><label><span>{t.dateLabel}</span><input type="date" min="2026-01-01" max="2030-12-31" value={selectedDate} onChange={(event) => dateChange(event.target.value)}/></label><button onClick={() => dateChange(zonedDate("Asia/Jakarta"))} className="today-button"><CalendarCheck2 size={16}/>{t.today}</button></div></div><div className="hero-motif" aria-hidden="true"><div className="motif-sun"/><div className="motif-paper"><i/><i/><i/><i/></div><div className="motif-textile"/></div></section>
 
-  return (
-    <main className="atlas-page">
-      <header className="site-header">
-        <a href="#top" className="brand" aria-label="Festival Atlas, beginning of page">
-          <AtlasMark className="brand-mark" />
-          <span className="brand-lockup"><span>Festival</span><strong>Atlas</strong></span>
-        </a>
-        <nav className="top-nav" aria-label="Primary navigation">
-          <a href="#explore">Explore</a>
-          <a href="#method">How to read this</a>
-          <a href="#sources">Sources</a>
-        </nav>
-        <a className="header-action" href="#explore"><Compass size={16} /> Open the atlas</a>
-      </header>
+    <section className="daily-shell" id="today"><aside className="timezone-rail"><span className="section-label"><Clock3 size={14}/>{t.clockTitle}</span>{zoneList.map((item) => <Clock key={item.zone} label={item.label} zone={item.zone}/>)}</aside><div className="daily-content"><div className="daily-heading"><div><span className="section-label"><MapPin size={14}/>{isToday ? t.today : longDate(selectedDate, language)}</span><h2>{isToday ? longDate(selectedDate, language) : longDate(selectedDate, language)}</h2></div><div className="country-switch" aria-label={t.countryLabel}>{(["All","India","Indonesia"] as CountryFilter[]).map((entry) => <button key={entry} className={country === entry ? "selected" : ""} onClick={() => { setCountry(entry); setLimit(18); }}>{entry === "All" ? t.allCountries : entry === "India" ? t.india : t.indonesia}</button>)}</div></div>
+      <div className={`today-card ${dayRecords.length ? "has-festival" : "quiet"}`}>{dayRecords.length ? <div className="today-list"><div className="today-lead"><span>{t.festivalToday}</span><h3>{dayRecords.length === 1 ? dayRecords[0].title[language] : `${dayRecords.length} ${language === "id" ? "perayaan berlangsung" : "celebrations are happening"}`}</h3></div>{dayRecords.map((entry) => <article key={entry.id} className="today-record"><div className={`record-mark ${kindColor[entry.kind]}`}>{entry.kind.slice(0,1)}</div><div><span className="record-meta">{entry.country} · {kindLabels[language][entry.kind]}</span><h4>{entry.title[language]}</h4><span className="casual-label">{t.casualNote}</span><p>{casualDescription(entry, language)}</p></div><span className={`status-stamp ${entry.status}`}>{statusLabel(entry.status, language)}</span></article>)}</div> : <div className="quiet-day"><div><span>{t.noFestival}</span><h3>{t.noFestivalDesc}</h3><p>{t.sourceNote}</p></div></div>}<CatCompanion hasFestival={dayRecords.length > 0} language={language}/></div>
+      {country === "Indonesia" && year > 2026 && <div className="future-note"><Info size={16}/><span>{t.futureIndo}</span></div>}
+    </div></section>
 
-      <section className="hero-section" id="top">
-        <div className="hero-copy">
-          <span className="eyebrow"><span className="ink-dash" />India + Indonesia cultural calendar</span>
-          <h1>Every year is a map of celebrations.</h1>
-          <p className="hero-description">Festival Atlas is a click-through field guide to major festivals, public holidays, national days and cultural observances across India and Indonesia.</p>
-          <div className="hero-actions">
-            <a href="#explore" className="primary-button">Browse all field notes <ArrowUpRight size={18} /></a>
-            <a href="#method" className="text-button">How dates work <ChevronRight size={17} /></a>
-          </div>
-          <div className="hero-metadata">
-            <div><strong>{indiaCount + indonesiaCount}</strong><span>curated entries</span></div>
-            <div><strong>10</strong><span>tradition labels</span></div>
-            <div><strong>2</strong><span>country collections</span></div>
-          </div>
-        </div>
-        <div className="hero-visual" aria-label="Festival Atlas field journal with cultural calendar materials">
-          <div className="hero-paper-art" aria-hidden="true"><span className="paper-contours" /><span className="paper-calendar" /><span className="paper-textile" /><span className="paper-lamp" /></div>
-          <div className="hero-stamp"><AtlasMark /><span>Living cultural<br />calendar</span></div>
-          <div className="hero-caption"><span>FIELD NOTE 01</span><strong>Follow the seasons,<br />not just the dates.</strong></div>
-        </div>
-      </section>
+    <section className="calendar-section" id="calendar"><div className="calendar-intro"><span className="section-label"><Globe2 size={14}/>{t.yearKicker}</span><h2>{t.yearHeading}</h2><p>{t.yearNote}</p></div><div className="calendar-controls"><div className="year-tabs">{[2026,2027,2028,2029,2030].map((item) => <button key={item} className={item === year ? "active" : ""} onClick={() => dateChange(`${item}-01-01`)}>{item}</button>)}</div><label className="search-field"><Search size={17}/><input value={query} onChange={(event) => { setQuery(event.target.value); setLimit(18); }} placeholder={t.searchPlaceholder}/>{query && <button onClick={() => setQuery("")} aria-label="Clear search"><X size={15}/></button>}</label></div><div className="calendar-ledger">{calendarResults.slice(0,limit).map((entry) => <button className="calendar-entry" key={entry.id} onClick={() => dateChange(entry.date)}><time dateTime={entry.date}><strong>{entry.date.slice(8)}</strong><span>{new Intl.DateTimeFormat(language === "id" ? "id-ID" : "en-GB", {month:"short", timeZone:"UTC"}).format(new Date(`${entry.date}T12:00:00Z`))}</span></time><span className={`thread-dot ${kindColor[entry.kind]}`}/><span className="entry-copy"><span className="record-meta">{entry.country} · {kindLabels[language][entry.kind]}</span><strong>{entry.title[language]}</strong></span><span className={`status-stamp ${entry.status}`}>{statusLabel(entry.status, language)}</span></button>)}</div>{calendarResults.length > limit && <button className="load-more" onClick={() => setLimit((value) => value + 18)}>{t.loadMore} <ChevronDown size={16}/></button>}<p className="source-caution"><Info size={16}/>{t.sourceNote}</p></section>
 
-      <section className="atlas-section" id="explore">
-        <aside className="country-rail" aria-label="Country collection selector">
-          <div className="rail-intro">
-            <span className="eyebrow"><MapPinned size={14} />Collections</span>
-            <p>Choose a country, then narrow the calendar by tradition, month or keyword.</p>
-          </div>
-          {(["All", "India", "Indonesia"] as CountryFilter[]).map((entry) => (
-            <button key={entry} className={`country-choice ${country === entry ? "selected" : ""}`} onClick={() => selectCountry(entry)}>
-              <span className="country-choice-line"><span>{entry === "All" ? "Both countries" : entry}</span><span className="country-count">{entry === "All" ? festivals.length : entry === "India" ? indiaCount : indonesiaCount}</span></span>
-              <span className="country-choice-note">{entry === "All" ? "One connected field guide" : entry === "India" ? "Faiths, regions and national days" : "Public holidays and island traditions"}</span>
-            </button>
-          ))}
-          <div className="rail-note">
-            <BookOpenText size={18} />
-            <p><strong>Read dates carefully.</strong> Many celebrations follow lunar, regional or religious calendars; use each field note as context and confirm local dates before planning.</p>
-          </div>
-        </aside>
+    <section className="utility-grid" id="guide"><article className="notification-card"><span className="section-label"><Bell size={14}/>{t.notificationTitle}</span><h3>{reminders ? t.notificationReady : t.pwaReady}</h3><p>{notificationState === "denied" ? t.notificationBlocked : notificationState === "unsupported" ? t.notificationUnsupported : t.notificationCaveat}</p><button className={reminders ? "notification-toggle on" : "notification-toggle"} onClick={reminders ? disableReminders : enableReminders}>{reminders ? <BellOff size={16}/> : <Bell size={16}/>} {reminders ? t.disableNotifications : t.enableNotifications}</button></article><article className="guide-card"><span className="section-label"><Info size={14}/>{language === "id" ? "Cara membaca" : "How to read it"}</span><h3>{language === "id" ? "Tanggal punya kalender dan konteksnya sendiri." : "Dates belong to calendars and communities."}</h3><p>{t.sourceNote}</p></article></section>
 
-        <div className="atlas-content">
-          <div className="content-heading">
-            <div>
-              <span className="eyebrow"><span className="ink-dash" />Field selections</span>
-              <h2>{country === "All" ? "A shared year of many traditions." : country === "India" ? "India, in many calendar languages." : "Indonesia, a plural public calendar."}</h2>
-            </div>
-            <p>{country === "All" ? "Start broad or choose a country collection." : country === "India" ? "Move across faiths, regions and civic milestones." : "Filter Muslim observances or explore Indonesia’s full multi-faith calendar."}</p>
-          </div>
-
-          <div className="filter-board">
-            <div className="search-box"><Search size={18} /><input aria-label="Search festivals" value={query} onChange={(event) => { setQuery(event.target.value); setShowAll(false); }} placeholder="Search a festival, tradition or region" />{query && <button aria-label="Clear search" onClick={() => setQuery("")}><X size={16} /></button>}</div>
-            <div className="filter-block">
-              <div className="filter-label"><SlidersHorizontal size={15} />Tradition</div>
-              <div className="filter-scroll" aria-label="Filter by tradition">
-                <button className={`filter-chip ${tradition === "All" ? "active" : ""}`} onClick={() => { setTradition("All"); setShowAll(false); }}>All traditions</button>
-                {availableTraditions.map((entry) => <button key={entry} className={`filter-chip ${entry.toLowerCase().replaceAll(" ", "-")} ${tradition === entry ? "active" : ""}`} onClick={() => { setTradition(entry); setShowAll(false); }}><span className="filter-dash" />{traditionLabel(entry, country)}</button>)}
-              </div>
-            </div>
-            <div className="filter-block month-block">
-              <div className="filter-label"><CalendarDays size={15} />Month</div>
-              <div className="month-strip" aria-label="Filter by month">
-                <button className={month === null ? "active" : ""} onClick={() => { setMonth(null); setShowAll(false); }}>All</button>
-                {monthNames.map((entry, index) => <button key={entry} className={month === index ? "active" : ""} onClick={() => { setMonth(index); setShowAll(false); }} aria-label={entry}>{entry.slice(0, 3)}</button>)}
-              </div>
-            </div>
-          </div>
-
-          {featured.length > 0 && !filterActive && (
-            <section className="featured-band" aria-label="Featured field notes">
-              <div className="section-kicker"><span>Selected entries</span><span className="rule" /></div>
-              <div className="featured-list">
-                {featured.map((festival, index) => <button className="featured-note" key={festival.id} onClick={() => setSelected(festival)}><span>0{index + 1}</span><div><small>{festival.country} · {traditionLabel(festival.tradition, festival.country)}</small><strong>{festival.name}</strong><p>{festival.timing}</p></div><ArrowUpRight size={19} /></button>)}
-              </div>
-            </section>
-          )}
-
-          {country === "All" && !filterActive && <section className="spotlight-grid" aria-label="Country collection highlights"><SpotlightCard country="India" count={indiaCount} /><SpotlightCard country="Indonesia" count={indonesiaCount} /></section>}
-
-          <section className="festival-results" aria-live="polite">
-            <div className="results-heading">
-              <div><span className="section-kicker"><span>Festival index</span><span className="rule" /></span><h3>{formatCount(filteredFestivals.length)}</h3></div>
-              {filterActive && <button className="clear-button" onClick={resetFilters}><X size={15} /> Clear selections</button>}
-            </div>
-            {filteredFestivals.length ? <div className="festival-ledger">{groupedFestivals.map(([monthIndex, monthlyFestivals]) => <section className="month-ledger" key={monthIndex}><div className="month-heading"><span className="month-number">{String(monthIndex + 1).padStart(2, "0")}</span><div><span className="eyebrow">Calendar thread</span><h4>{monthNames[monthIndex]}</h4></div><span className="month-count">{monthlyFestivals.length} {monthlyFestivals.length === 1 ? "entry" : "entries"}</span></div><div className="festival-grid">{monthlyFestivals.map((festival) => <FestivalCard key={festival.id} festival={festival} onOpen={setSelected} />)}</div></section>)}</div> : <div className="empty-state"><Compass size={24} /><h3>No field notes match this selection.</h3><p>Try changing the country, month, tradition or search term.</p><button onClick={resetFilters}>Clear every filter</button></div>}
-            {filteredFestivals.length > 18 && <button className="show-more" onClick={() => setShowAll(!showAll)}>{showAll ? "Show fewer entries" : `Show all ${filteredFestivals.length} entries`} <ChevronRight size={16} /></button>}
-          </section>
-        </div>
-      </section>
-
-      <section className="method-section" id="method">
-        <div className="method-title"><span className="eyebrow"><span className="ink-dash" />How to read this atlas</span><h2>Dates belong to calendars, communities and places.</h2></div>
-        <div className="method-grid">
-          <article><span>01</span><h3>Fixed days</h3><p>National days and special observances with a Gregorian date are identified in each note.</p></article>
-          <article><span>02</span><h3>Moveable dates</h3><p>Many festivals are marked by lunar, Hijri, Saka, Pawukon or regional calendars and may shift each year.</p></article>
-          <article><span>03</span><h3>Local meaning</h3><p>Descriptions give a respectful starting point. Communities and regions may celebrate the same event in distinct ways.</p></article>
-        </div>
-      </section>
-
-      <footer className="site-footer" id="sources">
-        <div className="footer-brand"><AtlasMark /><div><span>Festival Atlas</span><p>A living field guide for India and Indonesia.</p></div></div>
-        <div className="footer-source"><strong>Reference notes</strong><p>This editorial index is for discovery, not a statutory holiday or travel-planning service. Indonesia’s 2026 public-date examples follow <a href="https://www.bi.go.id/en/publikasi/Kalender/Documents/Holidays-And-Collective-Leaves-In-2026.pdf" target="_blank" rel="noreferrer">Bank Indonesia’s calendar</a>; national-day context is cross-checked with the <a href="https://www.india.gov.in/" target="_blank" rel="noreferrer">National Portal of India</a>.</p></div>
-      </footer>
-
-      <Dialog open={Boolean(selected)} onOpenChange={(open) => !open && setSelected(null)}>
-        <DialogContent className="festival-dialog">
-          {selected && <><DialogHeader><span className="dialog-meta"><CountryDot country={selected.country} /> {selected.country} · {traditionLabel(selected.tradition, selected.country)}</span><DialogTitle>{selected.name}</DialogTitle><DialogDescription>{selected.localName ? `${selected.localName} · ` : ""}{selected.timing}</DialogDescription></DialogHeader><div className="dialog-rule" /><div className="dialog-body"><div><span className="dialog-label">Where it is observed</span><p>{selected.region}</p></div><div><span className="dialog-label">Field note</span><p>{selected.description}</p></div><div><span className="dialog-label">Common practices</span><p>{selected.traditions}</p></div></div><p className="dialog-caution">Calendar note: dates, practices and public observance can vary by year, state, island, community and local announcement.</p></>}
-        </DialogContent>
-      </Dialog>
-    </main>
-  );
+    <footer className="ka-footer"><div className="ka-brand"><span className="ka-letter k">K</span><span className="ka-letter a">A</span><span className="festival-word">Festivals</span></div><p>{language === "id" ? "Kalender budaya India dan Indonesia, dirancang untuk rasa ingin tahu sehari-hari." : "An India and Indonesia cultural calendar, made for everyday curiosity."}</p><small>© 2026 KA Festivals · Static PWA</small></footer>
+  </main>;
 }

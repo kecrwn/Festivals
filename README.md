@@ -1,12 +1,16 @@
-# Festival Atlas
+# KA Festivals
 
-Festival Atlas is an interactive cultural calendar for **India and Indonesia**. It is designed as a field guide for discovering major national holidays, special days, religious observances and regional cultural festivals across many traditions.
+KA Festivals is an Indonesian-first, bilingual cultural calendar for **India and Indonesia**. It combines a daily observance companion, local timezone clocks, a five-year calendar index, PWA installation, and opt-in client-side festival reminders.
 
 ## What is included
 
-The site provides a broad, curated static collection. It includes India’s national dates and a diverse set of Hindu, Muslim, Sikh, Christian, Buddhist, Jain, regional and cultural observances. Indonesia’s collection includes national public holidays, Muslim observances, Christian dates, Nyepi and other Hindu traditions, Vesak, Chinese New Year, and regional cultural festivals. Visitors can switch countries, filter by tradition, select a month, search keywords, and open detail cards.
+The site provides a broad, curated static collection. It includes India’s national dates and a diverse set of Hindu, Muslim, Sikh, Christian, Buddhist, Jain, regional and cultural observances. Indonesia’s collection includes national public holidays, Muslim observances, Christian dates, Nyepi and other Hindu traditions, Vesak, Chinese New Year, and regional cultural festivals. Visitors can switch the entire interface between Indonesian and English, choose a date, compare India and Indonesia clocks, explore 2026–2030 calendar notes, and install the site as a PWA.
 
-> **Important:** This is an educational discovery tool, not a statutory public-holiday feed. Many festivals follow lunar, Hijri, Saka, Pawukon, regional, or community-specific calendars. Confirm a locally announced date before travel, events, or official planning.
+> **Important:** This is an educational discovery tool, not a statutory public-holiday feed. Many festivals follow lunar, Hijri, Saka, Pawukon, regional, or community-specific calendars. Confirm a locally announced date before travel, events, or official planning. Indonesia’s future religious public-holiday dates are deliberately labelled as awaiting official announcement rather than presented as confirmed.
+
+## Notifications and PWA behavior
+
+Visitors can install KA Festivals and explicitly enable browser notifications. Because this is a static deployment with no backend, reminders are evaluated when the PWA is open or resumes; the interface clearly warns that fully closed-browser delivery cannot be guaranteed across every device. The service worker provides app-shell caching and enables the browser notification path where supported.
 
 ## Run locally
 
