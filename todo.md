@@ -75,4 +75,4 @@
 - [x] Add a dedicated, country-toggled season guide route and a clear Home entry point without adding it to primary mobile tabs.
 - [x] Refine the mobile dock transition, KA/Festivals wordmark hierarchy, solar phase presentation, cross-route alignment, and accessible interaction feedback.
 - [x] Replace unsuitable celebration visuals only where a reliable, representative free-to-use asset or clearly labelled generated illustration is available; keep sources and caveats transparent.
-- [ ] Validate desktop/tablet/mobile routes, language/state continuity, visual assets, production build, repository push, and public deployment.
+- [x] Validate desktop/tablet/mobile routes, language/state continuity, visual assets, production build, repository push, and public deployment.
