@@ -1,6 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" role="img" aria-label="KA Festivals">
-  <rect width="192" height="192" rx="42" fill="#15314b"/>
-  <g fill="#e5952f"><path d="M96 25l8 37-8 15-8-15z"/><path d="M167 96l-37 8-15-8 15-8z"/><path d="M96 167l-8-37 8-15 8 15z"/><path d="M25 96l37-8 15 8-15 8z"/><path d="M146 46l-18 33-16 5 5-16z"/><path d="M146 146l-33-18-5-16 16 5z"/><path d="M46 146l18-33 16-5-5 16z"/><path d="M46 46l33 18 5 16-16-5z"/></g>
-  <circle cx="96" cy="96" r="35" fill="#f7f4ed"/><circle cx="96" cy="96" r="19" fill="#e5952f"/>
-  <text x="96" y="154" text-anchor="middle" fill="#f7f4ed" font-family="serif" font-size="30" font-weight="700">KA</text>
+  <rect width="192" height="192" rx="46" fill="#102d46"/>
+  <g fill="none" stroke="#e7a333" stroke-width="10" stroke-linecap="round">
+    <path d="M96 27v29M96 136v29M27 96h29M136 96h29M47 47l21 21M124 124l21 21M145 47l-21 21M68 124l-21 21"/>
+  </g>
+  <circle cx="96" cy="96" r="39" fill="#f7f5ef"/>
+  <circle cx="96" cy="96" r="22" fill="#c65f48"/>
+  <path d="M76 110L89 78H102L116 110H105L101 100H90L86 110H76ZM93 92H98L95 83L93 92Z" fill="#f7f5ef"/>
 </svg>

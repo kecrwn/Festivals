@@ -1,17 +1,17 @@
 /** Saffron Field Notes: app shell stays quiet so the almanac content remains the visual focus. */
-import { Toaster } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
 import { Route, Switch } from "wouter";
+import { lazy, Suspense } from "react";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { LocaleProvider } from "./contexts/LocaleContext";
-import Home from "./pages/Home";
-import Explore from "./pages/Explore";
-import FestivalDetail from "./pages/FestivalDetail";
-import Guide from "./pages/Guide";
-import Timeline from "./pages/Timeline";
-import NotFound from "./pages/NotFound";
 import SiteShell from "./components/SiteShell";
+
+const Home = lazy(() => import("./pages/Home"));
+const Explore = lazy(() => import("./pages/Explore"));
+const FestivalDetail = lazy(() => import("./pages/FestivalDetail"));
+const Guide = lazy(() => import("./pages/Guide"));
+const Timeline = lazy(() => import("./pages/Timeline"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 function Router() {
   return (
@@ -32,10 +32,7 @@ export default function App() {
     <ErrorBoundary>
       <ThemeProvider defaultTheme="light">
         <LocaleProvider>
-          <TooltipProvider>
-            <Toaster />
-            <SiteShell><Router /></SiteShell>
-          </TooltipProvider>
+          <SiteShell><Suspense fallback={<div className="route-loader" aria-label="Loading"/>}><Router /></Suspense></SiteShell>
         </LocaleProvider>
       </ThemeProvider>
     </ErrorBoundary>
