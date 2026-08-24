@@ -36,4 +36,12 @@
 - [x] Translate the supplied references into a restrained KA Festivals visual direction: editorial header, structured hero, one nature-backed glass calendar moment, a clearer footer, and an aligned mobile dock.
 - [x] Source and optimize one appropriate nature asset for the calendar moment, with a non-image fallback and correct text contrast.
 - [x] Implement the hero, header, glass calendar overlay, footer, and floating mobile-navigation refinements without changing calendar behavior.
-- [ ] Validate all routes and controls at desktop and mobile widths, confirm no overlap or clipping, run the production build, then push and verify the release.
+- [x] Validate all routes and controls at desktop and mobile widths, confirm no overlap or clipping, run the production build, then push and verify the release.
+
+## Full layout repair and crystal-glass audit
+
+- [ ] Create, validate, and apply a reusable KA Festivals design-audit skill using the required skill-authoring workflow.
+- [ ] Audit the current header, hero, Field Window, Solar Ledger, discovery, timeline, detail, guide, footer, and mobile dock at desktop and mobile widths.
+- [ ] Remove the detached square header treatment; rebuild the selected dock state as neutral crystal glass rather than opaque blue.
+- [ ] Repair hidden, overlapping, and low-contrast text; introduce season-aware nature artwork in intentional, readable sections without duplicating it site-wide.
+- [ ] Run full interaction, responsive, performance, and production trials; push the repair and verify the public bundle.

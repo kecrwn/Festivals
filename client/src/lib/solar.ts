@@ -59,5 +59,10 @@ export function getSolarSnapshot(now: Date, place: SolarPlace) {
   return { local, sunrise, sunset, phase, daylightProgress, season };
 }
 
+export function getSeasonForDate(isoDate: string, place: SolarPlace) {
+  const month = Number(isoDate.slice(5, 7));
+  return place.seasonBands.find((band) => band.months.includes(month)) || place.seasonBands[0];
+}
+
 export function formatSolarTime(timestamp: number, zone: string) { return new Intl.DateTimeFormat("en-GB", { timeZone:zone, hour:"2-digit", minute:"2-digit", hourCycle:"h23" }).format(new Date(timestamp)); }
 export function formatLiveTime(date: Date, zone: string) { return new Intl.DateTimeFormat("en-GB", { timeZone:zone, hour:"2-digit", minute:"2-digit", second:"2-digit", hourCycle:"h23" }).format(date); }
