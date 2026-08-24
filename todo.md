@@ -91,4 +91,4 @@
 - [x] Establish a desktop/mobile route matrix for Home, Index, Year, Guide, Season, detail, 404, header, dock, footer, and keyboard focus.
 - [x] Verify direct URLs, calendar/date/country/place/month/query state, bilingual UI, reminders, route-to-top behavior, image fallbacks, and mobile dock states.
 - [x] Inspect browser console/network errors, static asset responses, type checks, production build, whitespace, and bundle integrity.
-- [ ] Repair each confirmed bug or visible regression, then rerun the full visual and functional matrix before public release verification.
+- [x] Repair each confirmed bug or visible regression, then rerun the full visual and functional matrix before public release verification.
