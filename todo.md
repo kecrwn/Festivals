@@ -66,4 +66,4 @@
 - [x] Audit all primary routes, shared navigation, feedback states, and responsive behavior for friction, inconsistencies, and accessibility gaps.
 - [x] Prioritize and implement incremental UI/UX, interaction, animation, readability, and resilience improvements that preserve the KA Festivals field-atlas system.
 - [x] Validate keyboard/focus behavior, date/country/locale/month state continuity, images, mobile dock, and representative desktop/mobile layouts.
-- [ ] Run production checks, push the enhanced experience, verify the public release, and document the completed polish pass.
+- [x] Run production checks, push the enhanced experience, verify the public release, and document the completed polish pass.
