@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import Explore from "./pages/Explore";
 import FestivalDetail from "./pages/FestivalDetail";
 import Guide from "./pages/Guide";
+import Timeline from "./pages/Timeline";
 import NotFound from "./pages/NotFound";
 import SiteShell from "./components/SiteShell";
 
@@ -19,6 +20,7 @@ function Router() {
       <Route path="/explore" component={Explore} />
       <Route path="/festival/:id" component={FestivalDetail} />
       <Route path="/guide" component={Guide} />
+      <Route path="/timeline" component={Timeline} />
       <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
     </Switch>
