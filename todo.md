@@ -40,8 +40,16 @@
 
 ## Full layout repair and crystal-glass audit
 
-- [ ] Create, validate, and apply a reusable KA Festivals design-audit skill using the required skill-authoring workflow.
-- [ ] Audit the current header, hero, Field Window, Solar Ledger, discovery, timeline, detail, guide, footer, and mobile dock at desktop and mobile widths.
-- [ ] Remove the detached square header treatment; rebuild the selected dock state as neutral crystal glass rather than opaque blue.
-- [ ] Repair hidden, overlapping, and low-contrast text; introduce season-aware nature artwork in intentional, readable sections without duplicating it site-wide.
-- [ ] Run full interaction, responsive, performance, and production trials; push the repair and verify the public bundle.
+- [x] Create, validate, and apply a reusable KA Festivals design-audit skill using the required skill-authoring workflow.
+- [x] Audit the current header, hero, Field Window, Solar Ledger, discovery, timeline, detail, guide, footer, and mobile dock at desktop and mobile widths.
+- [x] Remove the detached square header treatment; rebuild the selected dock state as neutral crystal glass rather than opaque blue.
+- [x] Repair hidden, overlapping, and low-contrast text; introduce season-aware nature artwork in intentional, readable sections without duplicating it site-wide.
+- [x] Run full interaction, responsive, performance, and production trials; push the repair and verify the public bundle.
+
+## Bilingual celebration guide and visual context
+
+- [x] Audit all festival records, existing story fields, source notes, and visual fallbacks to identify scalable coverage gaps.
+- [x] Research representative celebration practices and cultural cautions for priority Indian and Indonesian festivals from credible primary, cultural, or institutional sources.
+- [x] Build a bilingual, nuanced “how it is celebrated” guide that distinguishes widespread practices from regional or family variation.
+- [x] Curate or source optimized, deploy-safe visual context for priority celebrations, with accessible fallbacks and source attribution.
+- [x] Validate language coverage, date-status integrity, image loading, responsive layouts, production build, and public deployment; then push the completed guide.
