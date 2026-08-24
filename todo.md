@@ -60,3 +60,10 @@
 - [x] Define and apply mobile-first type scale, spacing rhythm, touch-target, horizontal-scroll, and safe-bottom-navigation rules.
 - [x] Refine high-density calendar, Solar Ledger, cultural guide, Field Window, and footer content for small screens without weakening desktop or tablet composition.
 - [x] Validate responsive routes and interactions, run production quality checks, push, and verify the public responsive release.
+
+## Cross-route experience enhancement pass
+
+- [x] Audit all primary routes, shared navigation, feedback states, and responsive behavior for friction, inconsistencies, and accessibility gaps.
+- [x] Prioritize and implement incremental UI/UX, interaction, animation, readability, and resilience improvements that preserve the KA Festivals field-atlas system.
+- [x] Validate keyboard/focus behavior, date/country/locale/month state continuity, images, mobile dock, and representative desktop/mobile layouts.
+- [ ] Run production checks, push the enhanced experience, verify the public release, and document the completed polish pass.

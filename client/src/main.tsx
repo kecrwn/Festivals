@@ -9,5 +9,6 @@ import "./nature-glass.css";
 import "./layout-repair.css";
 import "./culture-guide.css";
 import "./mobile-optimizations.css";
+import "./experience-enhancements.css";
 
 createRoot(document.getElementById("root")!).render(<App />);
