@@ -7,8 +7,8 @@ import { useLocale } from "@/contexts/LocaleContext";
 import { kindLabels, statusLabels } from "@/lib/festival";
 
 const asset = {
-  diwali: "https://images.pexels.com/photos/3135229/pexels-photo-3135229.jpeg?auto=compress&cs=tinysrgb&w=1600",
-  eid: "https://images.pexels.com/photos/36824882/pexels-photo-36824882/free-photo-of-indonesian-family-celebrating-eid-al-fitr-together.jpeg?auto=compress&cs=tinysrgb&w=1600",
+  diwali: "https://images.pexels.com/photos/13689170/pexels-photo-13689170.jpeg?auto=compress&cs=tinysrgb&w=1600",
+  eid: "https://images.pexels.com/photos/9127584/pexels-photo-9127584.jpeg?auto=compress&cs=tinysrgb&w=1600",
   nyepi: "https://images.pexels.com/photos/37526113/pexels-photo-37526113/free-photo-of-traditional-balinese-canang-sari-offerings.jpeg?auto=compress&cs=tinysrgb&w=1600",
   bloom: undefined
 };

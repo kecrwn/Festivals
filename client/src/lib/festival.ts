@@ -56,8 +56,8 @@ export function fieldNote(record: FestivalRecord, language: Locale) {
 
 export function celebrationVisual(record: FestivalRecord) {
   const id = record.id.toLowerCase();
-  if (id.includes("diwali") || id.includes("deepavali")) return { src: "https://images.pexels.com/photos/3135229/pexels-photo-3135229.jpeg?auto=compress&cs=tinysrgb&w=1600", alt: { id: "Susunan lampu tanah liat dan warna hangat sebagai visual koleksi", en: "Clay lamps and warm colour arranged as a collection visual" } };
-  if (id.includes("fitri") || id.includes("eid") || id.includes("adha") || id.includes("mawlid") || id.includes("muharram")) return { src: "https://images.pexels.com/photos/36824882/pexels-photo-36824882/free-photo-of-indonesian-family-celebrating-eid-al-fitr-together.jpeg?auto=compress&cs=tinysrgb&w=1600", alt: { id: "Keluarga dan hidangan bersama sebagai visual koleksi", en: "Family and shared food as a collection visual" } };
+  if (id.includes("diwali") || id.includes("deepavali")) return { src: "https://images.pexels.com/photos/13689170/pexels-photo-13689170.jpeg?auto=compress&cs=tinysrgb&w=1600", alt: { id: "Susunan lampu tanah liat dan warna hangat sebagai visual koleksi", en: "Clay lamps and warm colour arranged as a collection visual" } };
+  if (id.includes("fitri") || id.includes("eid") || id.includes("adha") || id.includes("mawlid") || id.includes("muharram")) return { src: "https://images.pexels.com/photos/9127584/pexels-photo-9127584.jpeg?auto=compress&cs=tinysrgb&w=1600", alt: { id: "Keluarga dan hidangan bersama sebagai visual koleksi", en: "Family and shared food as a collection visual" } };
   if (id.includes("nyepi") || id.includes("galungan") || id.includes("kuningan")) return { src: "https://images.pexels.com/photos/37526113/pexels-photo-37526113/free-photo-of-traditional-balinese-canang-sari-offerings.jpeg?auto=compress&cs=tinysrgb&w=1600", alt: { id: "Rangkaian bunga dan bahan alami sebagai visual koleksi", en: "Flowers and natural materials arranged as a collection visual" } };
   return { src: undefined, alt: { id: "Material atlas sebagai visual koleksi", en: "Atlas materials as a collection visual" } };
 }
