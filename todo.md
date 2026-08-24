@@ -29,4 +29,11 @@
 - [x] Research authoritative seasonal climate context for Jharkhand, West Bengal, Palangka Raya, Jakarta, and Banjarmasin, including appropriate uncertainty and local variation notes.
 - [x] Define a transparent seasonal model and daylight-aware second-by-second clock treatment that does not overstate local weather or religious calendar facts.
 - [x] Implement the live clock, seasonal context layer, and inspired footer/interface refinements in Indonesian and English.
-- [ ] Validate time, day/night, seasonal labels, desktop/mobile layout, and static production build; then push and verify the release.
+- [x] Validate time, day/night, seasonal labels, desktop/mobile layout, and static production build; then push and verify the release.
+
+## Nature glass calendar visual enhancement
+
+- [x] Translate the supplied references into a restrained KA Festivals visual direction: editorial header, structured hero, one nature-backed glass calendar moment, a clearer footer, and an aligned mobile dock.
+- [x] Source and optimize one appropriate nature asset for the calendar moment, with a non-image fallback and correct text contrast.
+- [x] Implement the hero, header, glass calendar overlay, footer, and floating mobile-navigation refinements without changing calendar behavior.
+- [ ] Validate all routes and controls at desktop and mobile widths, confirm no overlap or clipping, run the production build, then push and verify the release.
