@@ -8,5 +8,6 @@ import "./solar-ledger.css";
 import "./nature-glass.css";
 import "./layout-repair.css";
 import "./culture-guide.css";
+import "./mobile-optimizations.css";
 
 createRoot(document.getElementById("root")!).render(<App />);

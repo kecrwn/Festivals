@@ -53,3 +53,10 @@
 - [x] Build a bilingual, nuanced “how it is celebrated” guide that distinguishes widespread practices from regional or family variation.
 - [x] Curate or source optimized, deploy-safe visual context for priority celebrations, with accessible fallbacks and source attribution.
 - [x] Validate language coverage, date-status integrity, image loading, responsive layouts, production build, and public deployment; then push the completed guide.
+
+## Mobile-first responsive optimization
+
+- [x] Audit Home, Index, Timeline, festival story, Guide, header, footer, and floating dock at 320–375px, tablet, and desktop widths.
+- [x] Define and apply mobile-first type scale, spacing rhythm, touch-target, horizontal-scroll, and safe-bottom-navigation rules.
+- [x] Refine high-density calendar, Solar Ledger, cultural guide, Field Window, and footer content for small screens without weakening desktop or tablet composition.
+- [ ] Validate responsive routes and interactions, run production quality checks, push, and verify the public responsive release.
