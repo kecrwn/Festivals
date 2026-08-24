@@ -84,3 +84,4 @@
 - [x] Rebalance Today’s hero/card, calendar field window, solar day-night instrument, place controls, reminder, season entry, and footer density without changing calendar state logic.
 - [x] Repair Index and Year horizontal balance, month hierarchy, timeline/atlas-marker legibility, discovery routing, and page-level explanation copy.
 - [x] Expand Guide and Season with clearer casual bilingual explanations, useful orientation details, visible place coverage, and considered glass/colour accents.
+- [x] Add performant, reduced-motion-safe celestial/falling-star feedback and validate layout, language, state continuity, build, GitHub, and production delivery.
