@@ -67,3 +67,12 @@
 - [x] Prioritize and implement incremental UI/UX, interaction, animation, readability, and resilience improvements that preserve the KA Festivals field-atlas system.
 - [x] Validate keyboard/focus behavior, date/country/locale/month state continuity, images, mobile dock, and representative desktop/mobile layouts.
 - [x] Run production checks, push the enhanced experience, verify the public release, and document the completed polish pass.
+
+## Season guide and cultural visual accuracy pass
+
+- [x] Audit all routes for alignment drift, excess side padding, mobile dock behavior, solar/day-night treatment, typography, and existing celebration-image fit.
+- [x] Research concise, responsibly qualified seasonal patterns for West Bengal, Jharkhand, Jakarta, Palangka Raya, and Banjarmasin; collect primary or authoritative references and culturally appropriate visual candidates.
+- [x] Add a dedicated, country-toggled season guide route and a clear Home entry point without adding it to primary mobile tabs.
+- [x] Refine the mobile dock transition, KA/Festivals wordmark hierarchy, solar phase presentation, cross-route alignment, and accessible interaction feedback.
+- [x] Replace unsuitable celebration visuals only where a reliable, representative free-to-use asset or clearly labelled generated illustration is available; keep sources and caveats transparent.
+- [ ] Validate desktop/tablet/mobile routes, language/state continuity, visual assets, production build, repository push, and public deployment.

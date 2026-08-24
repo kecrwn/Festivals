@@ -10,5 +10,7 @@ import "./layout-repair.css";
 import "./culture-guide.css";
 import "./mobile-optimizations.css";
 import "./experience-enhancements.css";
+import "./season-fieldbook.css";
+import "./seasonal-visual-refinement.css";
 
 createRoot(document.getElementById("root")!).render(<App />);

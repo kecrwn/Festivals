@@ -11,6 +11,7 @@ const Explore = lazy(() => import("./pages/Explore"));
 const FestivalDetail = lazy(() => import("./pages/FestivalDetail"));
 const Guide = lazy(() => import("./pages/Guide"));
 const Timeline = lazy(() => import("./pages/Timeline"));
+const Seasons = lazy(() => import("./pages/Seasons"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 function Router() {
@@ -21,6 +22,7 @@ function Router() {
       <Route path="/festival/:id" component={FestivalDetail} />
       <Route path="/guide" component={Guide} />
       <Route path="/timeline" component={Timeline} />
+      <Route path="/seasons" component={Seasons} />
       <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
     </Switch>
