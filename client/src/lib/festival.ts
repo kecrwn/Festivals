@@ -53,3 +53,11 @@ export function fieldNote(record: FestivalRecord, language: Locale) {
   };
   return notes[key]?.[language] || casualDescription(record, language);
 }
+
+export function celebrationVisual(record: FestivalRecord) {
+  const id = record.id.toLowerCase();
+  if (id.includes("diwali") || id.includes("deepavali")) return { src: "/manus-storage/ka-diwali-pexels_93754200.jpeg", alt: { id: "Susunan lampu tanah liat dan warna hangat sebagai visual koleksi", en: "Clay lamps and warm colour arranged as a collection visual" } };
+  if (id.includes("fitri") || id.includes("eid") || id.includes("adha") || id.includes("mawlid") || id.includes("muharram")) return { src: "/manus-storage/ka-eid-pexels_d32c7994.jpeg", alt: { id: "Keluarga dan hidangan bersama sebagai visual koleksi", en: "Family and shared food as a collection visual" } };
+  if (id.includes("nyepi") || id.includes("galungan") || id.includes("kuningan")) return { src: "/manus-storage/ka-nyepi-pexels_90d56634.jpeg", alt: { id: "Rangkaian bunga dan bahan alami sebagai visual koleksi", en: "Flowers and natural materials arranged as a collection visual" } };
+  return { src: "/manus-storage/ka-ketupat-unsplash_2ee66dc0.jpg", alt: { id: "Anyaman ketupat sebagai visual koleksi", en: "Woven ketupat as a collection visual" } };
+}
