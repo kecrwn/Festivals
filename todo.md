@@ -14,4 +14,11 @@
 - [x] Translate the supplied soft-glass, editorial, precision-panel, and dark-surface references into a culturally appropriate KA Festivals visual direction.
 - [x] Add restrained pane, rail, command-bar, and field-note treatments without reducing reading contrast or cultural warmth.
 - [x] Refine home, discovery, timeline, detail, and guide layouts across desktop and mobile while retaining date, language, and route behavior.
-- [ ] Run desktop and mobile visual trials, then push and verify the reference-informed update.
+- [x] Run desktop and mobile visual trials, then push and verify the reference-informed update.
+
+## Research-led cultural calendar enhancement
+
+- [x] Research editorial calendar, museum collection, and inclusive cultural-directory patterns from credible public sources.
+- [x] Synthesize the research into a focused KA Festivals design extension that strengthens seasonal orientation and cultural storytelling.
+- [x] Implement the selected new modules and interaction details without adding clutter or weakening static performance.
+- [x] Validate the expanded experience on desktop and mobile, then push and verify the live update.
