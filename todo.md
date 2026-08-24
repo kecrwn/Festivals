@@ -8,3 +8,10 @@
 - [x] Strengthen SEO metadata, semantic structure, image-loading rules, and responsive performance across all routes.
 - [x] Replace the stale asset cache path with a versioned network-first PWA policy for returning visitors.
 - [x] Finish responsive, route, and production trials; then build, push, and verify the live site.
+
+## Precision-panel visual refinement
+
+- [x] Translate the supplied soft-glass, editorial, precision-panel, and dark-surface references into a culturally appropriate KA Festivals visual direction.
+- [x] Add restrained pane, rail, command-bar, and field-note treatments without reducing reading contrast or cultural warmth.
+- [x] Refine home, discovery, timeline, detail, and guide layouts across desktop and mobile while retaining date, language, and route behavior.
+- [ ] Run desktop and mobile visual trials, then push and verify the reference-informed update.

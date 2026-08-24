@@ -147,3 +147,9 @@ The next KA Festivals pass treats the product as a **Northwater Index**: a quiet
 ### Style Decisions
 
 Mika is constrained to a single, small companion beside quiet daily states; it is never mirrored or used as structural decoration. Route-card imagery is overlaid with material labels such as **LAMP · NOTE**, **SHARE · TABLE**, and **PAUSE · BALI**, together with saffron compass fragments, so each visual route reads as a held atlas object rather than a generic travel thumbnail. The compass-bloom and compact KA stamp appear at readable moments in primary navigation, month markers, story field notes, timeline selection, guide evidence cards, and the sky ledger.
+
+## Precision-panel reference direction
+
+The supplied references point toward **softly layered work surfaces**, strong date numerals, compact utility rails, and high-contrast information panels. KA Festivals will adopt those interaction qualities, not their generic productivity-app aesthetic. Warm paper remains the primary reading surface; deep night ink is reserved for selected controls, small featured data panels, and the constellation footer. Fine translucent borders, shallow atmospheric shadows, and deliberate interior spacing will make the interface feel more precise without hiding cultural context beneath dashboard chrome.
+
+The homepage will treat the daily schedule as a focused “day board” with a calm metadata rail and clear sequence of actions. Discovery will borrow the references’ command-bar discipline: country and year live in a tight side panel, while search, category controls, and monthly chapters read as one continuous work surface. Cards remain square and editorial rather than excessively rounded. The resulting character is **quiet, tactile, and exacting**.
