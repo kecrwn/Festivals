@@ -59,4 +59,4 @@
 - [x] Audit Home, Index, Timeline, festival story, Guide, header, footer, and floating dock at 320–375px, tablet, and desktop widths.
 - [x] Define and apply mobile-first type scale, spacing rhythm, touch-target, horizontal-scroll, and safe-bottom-navigation rules.
 - [x] Refine high-density calendar, Solar Ledger, cultural guide, Field Window, and footer content for small screens without weakening desktop or tablet composition.
-- [ ] Validate responsive routes and interactions, run production quality checks, push, and verify the public responsive release.
+- [x] Validate responsive routes and interactions, run production quality checks, push, and verify the public responsive release.
