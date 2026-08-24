@@ -76,3 +76,11 @@
 - [x] Refine the mobile dock transition, KA/Festivals wordmark hierarchy, solar phase presentation, cross-route alignment, and accessible interaction feedback.
 - [x] Replace unsuitable celebration visuals only where a reliable, representative free-to-use asset or clearly labelled generated illustration is available; keep sources and caveats transparent.
 - [x] Validate desktop/tablet/mobile routes, language/state continuity, visual assets, production build, repository push, and public deployment.
+
+## Precision visual, navigation, and language refinement pass
+
+- [x] Audit the requested Today, Index, Year, Guide, Season, footer, header, dock, typography, alignment, and language clarity issues at desktop and mobile breakpoints.
+- [x] Rework shared KA/Festivals type hierarchy, compact controls, primary-route scroll reset, sliding dock indicator, and crystal selected states.
+- [x] Rebalance Today’s hero/card, calendar field window, solar day-night instrument, place controls, reminder, season entry, and footer density without changing calendar state logic.
+- [x] Repair Index and Year horizontal balance, month hierarchy, timeline/atlas-marker legibility, discovery routing, and page-level explanation copy.
+- [x] Expand Guide and Season with clearer casual bilingual explanations, useful orientation details, visible place coverage, and considered glass/colour accents.
