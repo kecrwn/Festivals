@@ -48,12 +48,12 @@ function solarTimeUtc(year: number, month: number, day: number, latitude: number
   let rightAscension = normalize(deg(Math.atan(0.91764 * Math.tan(rad(sunLongitude))))); rightAscension += Math.floor(sunLongitude / 90) * 90 - Math.floor(rightAscension / 90) * 90; rightAscension /= 15;
   const sinDeclination = 0.39782 * Math.sin(rad(sunLongitude)); const cosDeclination = Math.cos(Math.asin(sinDeclination)); const cosHour = (Math.cos(rad(90.833)) - sinDeclination * Math.sin(rad(latitude))) / (cosDeclination * Math.cos(rad(latitude)));
   if (cosHour > 1 || cosHour < -1) return Number.NaN;
-  const hour = (sunset ? deg(Math.acos(cosHour)) : 360 - deg(Math.acos(cosHour))) / 15; const localMean = hour + rightAscension - 0.06571 * t - 6.622; const utcHours = ((localMean - lngHour) % 24 + 24) % 24;
+  const hour = (sunset ? deg(Math.acos(cosHour)) : 360 - deg(Math.acos(cosHour))) / 15; const localMean = hour + rightAscension - 0.06571 * t - 6.622; const utcHours = localMean - lngHour;
   return Date.UTC(year, month - 1, day) + utcHours * 3_600_000;
 }
 
 export function getSolarSnapshot(now: Date, place: SolarPlace) {
-  const local = zonedParts(now, place.zone); const sunrise = solarTimeUtc(local.year, local.month, local.day, place.latitude, place.longitude, false); const sunset = solarTimeUtc(local.year, local.month, local.day, place.latitude, place.longitude, true); const dawn = sunrise - 30 * 60_000; const dusk = sunset + 30 * 60_000; const timestamp = now.getTime();
+  const local = zonedParts(now, place.zone); const sunrise = solarTimeUtc(local.year, local.month, local.day, place.latitude, place.longitude, false); const computedSunset = solarTimeUtc(local.year, local.month, local.day, place.latitude, place.longitude, true); const sunset = computedSunset < sunrise ? computedSunset + 86_400_000 : computedSunset; const dawn = sunrise - 30 * 60_000; const dusk = sunset + 30 * 60_000; const timestamp = now.getTime();
   const phase: SolarPhase = timestamp < dawn || timestamp > dusk ? "night" : timestamp < sunrise + 30 * 60_000 ? "dawn" : timestamp > sunset - 30 * 60_000 ? "dusk" : "day";
   const daylightProgress = Math.min(1, Math.max(0, (timestamp - sunrise) / (sunset - sunrise))); const season = place.seasonBands.find((band) => band.months.includes(local.month)) || place.seasonBands[0];
   return { local, sunrise, sunset, phase, daylightProgress, season };
