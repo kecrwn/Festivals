@@ -22,3 +22,11 @@
 - [x] Synthesize the research into a focused KA Festivals design extension that strengthens seasonal orientation and cultural storytelling.
 - [x] Implement the selected new modules and interaction details without adding clutter or weakening static performance.
 - [x] Validate the expanded experience on desktop and mobile, then push and verify the live update.
+
+## Location-aware season and daylight clock extension
+
+- [x] Review the supplied interface and footer references for reusable composition, hierarchy, and motion principles.
+- [x] Research authoritative seasonal climate context for Jharkhand, West Bengal, Palangka Raya, Jakarta, and Banjarmasin, including appropriate uncertainty and local variation notes.
+- [x] Define a transparent seasonal model and daylight-aware second-by-second clock treatment that does not overstate local weather or religious calendar facts.
+- [x] Implement the live clock, seasonal context layer, and inspired footer/interface refinements in Indonesian and English.
+- [ ] Validate time, day/night, seasonal labels, desktop/mobile layout, and static production build; then push and verify the release.

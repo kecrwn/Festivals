@@ -157,3 +157,7 @@ The homepage will treat the daily schedule as a focused “day board” with a c
 ## Research-led Season Lens
 
 The daily companion now extends into a bilingual **Season Lens**: a concise, month-specific reading layer built only from the existing calendar records. It follows a deliberate sequence—**selected day → this month’s notes → one festival story**—so visitors can orient themselves before entering the wider index. The month chapter opens through an explicit `year`, `month`, and `country` deep link, which keeps the chosen cultural context visible and supports easy return to the full archive. This layer prioritises clear headings, short readable entries, and local-date context over dense dashboards or unsupported cultural claims.
+
+## Solar ledger and living footer
+
+The next refinement introduces a **Solar Ledger**: an in-browser, second-by-second time instrument with approximate solar windows for Kolkata, Ranchi, Jakarta, Palangka Raya, and Banjarmasin. It will use an ink-and-saffron horizon rather than weather imagery: the day-night state is derived only from local clock time and solar calculations. A companion **Season Ground** panel will present broad monthly climate rhythms for the named places with a visible typical-not-forecast qualifier. The new footer takes inspiration from the supplied references through an editorial “closing ledger”: stronger typographic structure, small route metadata, low-contrast star lines, and an intentional final call to continue through the index—never a generic corporate link column.
