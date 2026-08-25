@@ -104,5 +104,5 @@
 
 - [x] Audit the recovered Home, Index, Year, Guide, Season, detail, header, dock, and footer for safe detail-level opportunities only.
 - [x] Add selective tactile states, accessibility refinements, readable metadata, and restrained cultural-material accents without moving primary layout regions.
-- [ ] Recheck Home, Index, Year, Guide, Season, detail, and fixed mobile navigation across desktop, tablet, and mobile before release.
-- [ ] Run build and production validation, push the careful polish, and record the verified release.
+- [x] Recheck Home, Index, Year, Guide, Season, detail, and fixed mobile navigation across desktop, tablet, and mobile before release.
+- [x] Run build and production validation, push the careful polish, and record the verified release.
