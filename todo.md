@@ -98,4 +98,4 @@
 - [x] Capture and diagnose the current desktop and mobile regressions in Home, Index, Year, Guide, Season, detail, header, dock, and footer.
 - [x] Restore a coherent shared layout baseline: attached header, proportionate KA identity, controlled page widths, typography hierarchy, crystal dock, and readable panels.
 - [x] Repair Home and Solar Ledger composition, Index/Year alignment, Guide/Season rhythm, detail surfaces, and footer without altering calendar data or navigation behavior.
-- [ ] Revalidate all core routes and direct states at desktop, tablet, and mobile widths; run type/build checks and public release verification.
+- [x] Revalidate all core routes and direct states at desktop, tablet, and mobile widths; run type/build checks and public release verification.
