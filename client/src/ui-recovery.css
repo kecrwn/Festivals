@@ -1,0 +1,193 @@
+/* KA UI recovery: warm paper is the primary field, ink is reserved for authority surfaces, and saffron/terracotta carry cultural/date meaning. This final layer consolidates spacing and material hierarchy without touching route state. */
+:root {
+  --recovery-frame: min(1180px, calc(100% - 48px));
+  --recovery-ink: #10344d;
+  --recovery-saffron: #d99627;
+  --recovery-terracotta: #c46549;
+}
+
+.app-frame {
+  padding-bottom: 0 !important;
+  background: radial-gradient(circle at 87% 9%, rgba(232,188,110,.12), transparent 21rem), var(--paper);
+}
+body { padding-bottom: 0 !important; }
+
+.site-header-new { width: var(--recovery-frame) !important; height: 70px !important; }
+.site-header-new .brand-bloom { width: 34px !important; height: 34px !important; box-shadow: 0 0 0 5px rgba(255,253,249,.84), 0 0 0 6px rgba(196,101,73,.16) !important; }
+.brand-lockup strong { color: var(--recovery-terracotta) !important; }
+.brand-lockup em { color: var(--recovery-ink) !important; }
+.desktop-nav a.active:after { background: var(--recovery-terracotta) !important; }
+
+.home-hero,
+.field-window,
+.solar-ledger,
+.today-wrap,
+.season-lens,
+.home-bottom,
+.northwater-index,
+.timeline-page,
+.guide-page,
+.season-fieldbook,
+.detail-page { width: var(--recovery-frame) !important; }
+
+.home-hero {
+  position: relative;
+  min-height: 430px !important;
+  grid-template-columns: minmax(0,1.03fr) minmax(340px,.97fr) !important;
+  gap: clamp(30px, 5vw, 76px) !important;
+  padding: 42px 0 37px !important;
+}
+.home-hero:after {
+  position: absolute;
+  right: 39%;
+  top: 56px;
+  width: 76px;
+  height: 76px;
+  border: 1px solid rgba(196,101,73,.22);
+  border-radius: 50%;
+  background: repeating-conic-gradient(from 0deg, rgba(217,150,39,.22) 0 4deg, transparent 4deg 30deg);
+  content: "";
+  opacity: .76;
+  pointer-events: none;
+}
+.home-hero:before {
+  position: absolute;
+  left: 62%;
+  right: auto;
+  top: 52px;
+  width: min(38%, 438px);
+  height: 288px;
+  border: 1px solid rgba(16,52,77,.25);
+  background:
+    radial-gradient(circle at 78% 23%, rgba(255,244,206,.92) 0 26px, transparent 27px),
+    repeating-linear-gradient(135deg, transparent 0 17px, rgba(255,255,255,.16) 17px 18px),
+    linear-gradient(135deg, #104b58 0 47%, #1e7271 47% 55%, #d66f52 55% 56%, #efd8aa 56% 100%);
+  box-shadow: 14px 15px 0 rgba(16,52,77,.07), 0 24px 40px rgba(16,52,77,.11);
+  content: "";
+  z-index: 0;
+  pointer-events: none;
+}
+.hero-copy-new { position: relative; z-index: 1; }
+.hero-copy-new h1 { max-width: 620px !important; letter-spacing: -.068em !important; }
+.hero-copy-new p { max-width: 510px !important; }
+.home-actions { max-width: 555px !important; }
+
+.hero-calendar-object {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  isolation: isolate;
+  overflow: hidden;
+  height: 296px !important;
+  max-width: 480px !important;
+  margin: auto 0 auto auto !important;
+  border: 1px solid rgba(16,52,77,.23) !important;
+  border-radius: 9px !important;
+  background-color: #174c59 !important;
+  background-image: linear-gradient(132deg, #f8f0df 0 42%, #d9a13a 42% 43%, #d86f54 43% 44%, #174c59 44% 100%) !important;
+  box-shadow: 12px 14px 0 rgba(16,52,77,.08), 0 24px 40px rgba(16,52,77,.11) !important;
+  transform: none !important;
+}
+.hero-calendar-object:before { position: absolute; z-index: -1; inset: 15px; border: 1px solid rgba(16,52,77,.2); content: ""; }
+.hero-calendar-object:after { border: 0 !important; border-radius: 0 !important; background: linear-gradient(90deg, transparent 0 48%, rgba(255,253,249,.56) 48% 48.35%, transparent 48.35%) !important; }
+.home-hero .hero-calendar-object { background-color: #174c59 !important; background-image: linear-gradient(132deg, #f8f0df 0 42%, #d9a13a 42% 43%, #d86f54 43% 44%, #174c59 44% 100%) !important; }
+.home-hero .hero-calendar-object > * { display: block !important; visibility: visible !important; opacity: 1 !important; }
+.home-hero .object-route, .home-hero .object-stamp, .home-hero .object-calendar-strip, .home-hero .object-card, .home-hero .object-textile, .home-hero .object-lamp, .home-hero .object-flower { position: absolute !important; z-index: 3 !important; }
+.home-hero .object-line { display: block !important; visibility: visible !important; opacity: 1 !important; z-index: 2 !important; }
+.object-route { left: 19px !important; top: 19px !important; color: var(--recovery-ink) !important; font-weight: 800 !important; }
+.object-route i, .object-calendar-strip i { background: var(--recovery-terracotta) !important; }
+.object-stamp { right: 20px !important; top: 18px !important; border-color: rgba(255,253,249,.65) !important; color: #fff8e9 !important; }
+.object-calendar-strip { left: 20px !important; bottom: 20px !important; color: var(--recovery-ink) !important; }
+.object-line { border-color: rgba(196,101,73,.55) !important; }
+.object-card { right: 34px !important; top: 64px !important; width: 153px !important; height: 166px !important; border: 1px solid rgba(16,52,77,.2) !important; background: #fffaf0 !important; box-shadow: 8px 8px 0 rgba(16,52,77,.18) !important; color: var(--recovery-ink) !important; }
+.object-card span { color: var(--recovery-terracotta) !important; }
+.object-card i { background: rgba(16,52,77,.35) !important; }
+.object-textile { left: 41px !important; bottom: 64px !important; opacity: 1 !important; }
+.object-textile i { background: var(--recovery-terracotta) !important; }
+.object-lamp { right: 178px !important; bottom: 31px !important; background: var(--recovery-saffron) !important; box-shadow: 0 0 0 9px rgba(217,150,39,.16) !important; }
+.object-flower { right: -4px !important; bottom: -7px !important; opacity: .94 !important; }
+
+.field-window[data-tone] {
+  isolation: isolate;
+  min-height: 370px !important;
+  border: 1px solid rgba(16,52,77,.18) !important;
+  background-color: #0e4655 !important;
+  background-image: linear-gradient(134deg, #0e4655 0 47%, #1d6f70 47% 58%, #d86f54 58% 58.6%, #f2dfbd 58.6% 100%) !important;
+  background-size: cover !important;
+  box-shadow: 0 20px 36px rgba(16,52,77,.1) !important;
+}
+.field-window:before {
+  position: absolute;
+  z-index: 0;
+  left: 26px;
+  bottom: 24px;
+  width: 176px;
+  height: 176px;
+  border: 1px dashed rgba(255,244,215,.42);
+  border-radius: 50%;
+  background: repeating-conic-gradient(from 0deg, rgba(255,232,167,.23) 0 3deg, transparent 3deg 30deg);
+  content: "";
+}
+.field-window:after { position: absolute; z-index: 0; right: 8%; top: 0; width: 1px; height: 100%; background: rgba(255,255,255,.35); box-shadow: -9px 0 0 rgba(255,255,255,.09); content: ""; }
+.field-window-veil { z-index: 0 !important; background: linear-gradient(90deg, rgba(9,47,58,.15), transparent 62%) !important; }
+.field-window-stamp, .field-window-leaf { z-index: 2 !important; color: #fff7e7 !important; }
+.glass-calendar-window { z-index: 2 !important; border: 1px solid rgba(255,255,255,.54) !important; background: rgba(255,250,239,.88) !important; box-shadow: 0 16px 32px rgba(7,37,45,.28) !important; }
+.glass-calendar-window header > span, .glass-calendar-window footer small { color: var(--recovery-terracotta) !important; }
+.glass-month-grid i.selected { background: var(--recovery-saffron) !important; color: var(--recovery-ink) !important; }
+
+.solar-ledger { border-color: rgba(16,52,77,.18) !important; box-shadow: 0 12px 26px rgba(16,52,77,.07) !important; }
+.solar-ledger:not([data-phase="night"]):not([data-phase="dawn"]):not([data-phase="dusk"]) { background: linear-gradient(132deg, #fffdf8, #f0e5cc) !important; }
+.today-wrap, .season-lens { box-shadow: 0 12px 25px rgba(16,52,77,.06) !important; }
+.home-bottom { align-items: stretch !important; }
+.reminder-card, .guide-teaser { min-height: 232px !important; }
+.season-guide { position: relative; overflow: hidden; background: linear-gradient(138deg, #133f52, #1e6970) !important; }
+.season-guide:before { position: absolute; right: -48px; top: -52px; width: 190px; height: 190px; border: 1px solid rgba(255,239,195,.36); border-radius: 50%; background: repeating-conic-gradient(from 0deg, rgba(255,211,111,.22) 0 3deg, transparent 3deg 30deg); content: ""; }
+.season-guide > * { position: relative; z-index: 1; }
+
+.northwater-index, .timeline-page, .guide-page, .season-fieldbook, .detail-page { padding-top: 42px !important; padding-bottom: 62px !important; }
+.index-hero, .timeline-heading, .guide-page > header, .season-fieldbook-head { position: relative; }
+.index-hero:before, .timeline-heading:before, .guide-page > header:before, .season-fieldbook-head:before { position: absolute; top: -10px; left: 0; width: 44px; height: 4px; background: linear-gradient(90deg, var(--recovery-saffron), var(--recovery-terracotta)); content: ""; }
+.festival-arc, .season-map-board { box-shadow: 0 12px 25px rgba(16,52,77,.05) !important; }
+.northwater-results .month-ledger > header { background: linear-gradient(90deg, rgba(217,150,39,.16), rgba(255,253,249,.92) 72%) !important; }
+.guide-grid article { border-top: 2px solid rgba(217,150,39,.42) !important; }
+.season-atlas-art { background: linear-gradient(145deg, #0e5060, #1a6670) !important; }
+.detail-photo { box-shadow: 0 12px 26px rgba(16,52,77,.1) !important; }
+
+.northwater-footer { margin-top: 0 !important; margin-bottom: 0 !important; padding-bottom: max(28px, env(safe-area-inset-bottom)) !important; background: #0c3147 !important; }
+.northwater-footer .footer-intro { padding-top: 40px !important; padding-bottom: 29px !important; }
+.northwater-footer .sky-ledger { min-height: 296px !important; }
+.sky-ledger:after { opacity: .34 !important; }
+.site-header-new, .northwater-footer { max-width: none !important; }
+
+@media (max-width: 700px) {
+  .app-frame { padding-bottom: 0 !important; }
+  .site-header-new { width: 100% !important; height: 60px !important; }
+  .site-header-new .brand-bloom { width: 24px !important; height: 24px !important; }
+  .brand-lockup strong { font-size: 1.35rem !important; }
+  .brand-lockup em { font-size: .52rem !important; }
+  .home-hero, .field-window, .solar-ledger, .today-wrap, .season-lens, .home-bottom, .northwater-index, .timeline-page, .guide-page, .season-fieldbook, .detail-page { width: calc(100% - 28px) !important; }
+  .home-hero { min-height: 0 !important; grid-template-columns: 1fr !important; gap: 17px !important; padding: 26px 0 20px !important; }
+  .home-hero:after { right: 11px; top: 27px; width: 48px; height: 48px; opacity: .56; }
+  .home-hero:before { left: 0; right: auto; top: auto; bottom: 18px; width: 100%; height: 184px; }
+  .hero-copy-new h1 { max-width: 292px !important; font-size: clamp(2.75rem, 14vw, 3.65rem) !important; }
+  .hero-calendar-object { height: 184px !important; max-width: none !important; margin: 0 !important; }
+  .object-route { left: 14px !important; top: 13px !important; font-size: .39rem !important; }
+  .object-stamp { right: 13px !important; top: 12px !important; font-size: .35rem !important; }
+  .object-calendar-strip { left: 14px !important; bottom: 13px !important; font-size: .38rem !important; }
+  .object-card { right: 24px !important; top: 42px !important; width: 112px !important; height: 109px !important; padding: 12px !important; }
+  .object-card i { margin-top: 10px !important; }
+  .object-lamp { right: 138px !important; bottom: 19px !important; transform: scale(.72); }
+  .object-textile { left: 26px !important; bottom: 43px !important; transform: scale(.72); transform-origin: left bottom; }
+  .object-flower { transform: scale(.62) !important; transform-origin: bottom right; }
+  .field-window[data-tone] { min-height: 344px !important; }
+  .field-window:before { left: 10px; bottom: 12px; width: 112px; height: 112px; }
+  .field-window:after { right: 13px; }
+  .glass-calendar-window { right: 13px !important; bottom: 13px !important; width: calc(100% - 26px) !important; }
+  .home-bottom { gap: 12px !important; }
+  .reminder-card, .guide-teaser { min-height: 0 !important; }
+  .northwater-index, .timeline-page, .guide-page, .season-fieldbook, .detail-page { padding-top: 31px !important; padding-bottom: 42px !important; }
+  .northwater-footer { padding-bottom: calc(76px + env(safe-area-inset-bottom)) !important; }
+  .northwater-footer .footer-intro { padding: 31px 15px 18px !important; }
+  .northwater-footer .sky-ledger { min-height: 248px !important; }
+  .mobile-dock { bottom: max(10px, env(safe-area-inset-bottom)) !important; }
+}

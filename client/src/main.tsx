@@ -17,5 +17,6 @@ import "./timeline-centring-fix.css";
 import "./guide-reading-path.css";
 import "./index-five-routes.css";
 import "./season-place-shortcuts.css";
+import "./ui-recovery.css";
 
 createRoot(document.getElementById("root")!).render(<App />);

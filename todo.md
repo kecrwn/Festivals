@@ -92,3 +92,10 @@
 - [x] Verify direct URLs, calendar/date/country/place/month/query state, bilingual UI, reminders, route-to-top behavior, image fallbacks, and mobile dock states.
 - [x] Inspect browser console/network errors, static asset responses, type checks, production build, whitespace, and bundle integrity.
 - [x] Repair each confirmed bug or visible regression, then rerun the full visual and functional matrix before public release verification.
+
+## Full UI recovery pass
+
+- [x] Capture and diagnose the current desktop and mobile regressions in Home, Index, Year, Guide, Season, detail, header, dock, and footer.
+- [x] Restore a coherent shared layout baseline: attached header, proportionate KA identity, controlled page widths, typography hierarchy, crystal dock, and readable panels.
+- [x] Repair Home and Solar Ledger composition, Index/Year alignment, Guide/Season rhythm, detail surfaces, and footer without altering calendar data or navigation behavior.
+- [ ] Revalidate all core routes and direct states at desktop, tablet, and mobile widths; run type/build checks and public release verification.
