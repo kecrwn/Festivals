@@ -99,3 +99,10 @@
 - [x] Restore a coherent shared layout baseline: attached header, proportionate KA identity, controlled page widths, typography hierarchy, crystal dock, and readable panels.
 - [x] Repair Home and Solar Ledger composition, Index/Year alignment, Guide/Season rhythm, detail surfaces, and footer without altering calendar data or navigation behavior.
 - [x] Revalidate all core routes and direct states at desktop, tablet, and mobile widths; run type/build checks and public release verification.
+
+## Conservative enhancement pass
+
+- [x] Audit the recovered Home, Index, Year, Guide, Season, detail, header, dock, and footer for safe detail-level opportunities only.
+- [x] Add selective tactile states, accessibility refinements, readable metadata, and restrained cultural-material accents without moving primary layout regions.
+- [ ] Recheck Home, Index, Year, Guide, Season, detail, and fixed mobile navigation across desktop, tablet, and mobile before release.
+- [ ] Run build and production validation, push the careful polish, and record the verified release.

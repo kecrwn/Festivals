@@ -159,6 +159,55 @@ body { padding-bottom: 0 !important; }
 .sky-ledger:after { opacity: .34 !important; }
 .site-header-new, .northwater-footer { max-width: none !important; }
 
+/* Deliberately non-structural polish: tactile confirmation and readable field metadata. */
+::selection { background: rgba(217,150,39,.28); color: var(--recovery-ink); }
+:where(.date-control, .search-field-index, .solar-place-tabs, .country-pills, .arc-country-filter):focus-within {
+  box-shadow: 0 0 0 3px rgba(217,150,39,.14);
+}
+.date-control:focus-within { border-color: rgba(196,101,73,.62) !important; }
+.solar-place-tabs button,
+.country-pills button,
+.arc-country-filter button,
+.category-filter button,
+.year-rail button,
+.rail-group button {
+  transition: color .16s var(--ease), background-color .16s var(--ease), border-color .16s var(--ease), transform .16s var(--ease), box-shadow .16s var(--ease);
+}
+.status-chip,
+.object-stamp,
+.field-window-stamp,
+.detail-photo figcaption,
+.route-card .route-tag {
+  letter-spacing: .075em !important;
+}
+.northwater-results .festival-row:focus-within,
+.arc-record:focus-within {
+  box-shadow: inset 3px 0 0 var(--recovery-saffron), 0 5px 14px rgba(16,52,77,.06);
+}
+.footer-links a { text-underline-offset: 4px; }
+
+@media (hover: hover) and (pointer: fine) {
+  .route-card:hover { transform: translateY(-3px); box-shadow: 0 14px 25px rgba(16,52,77,.14); }
+  .northwater-results .festival-row:hover { transform: translateX(2px); }
+  .solar-place-tabs button:hover,
+  .country-pills button:hover,
+  .arc-country-filter button:hover,
+  .category-filter button:hover,
+  .year-rail button:hover,
+  .rail-group button:hover { border-color: rgba(196,101,73,.48); color: var(--recovery-ink); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route-card,
+  .northwater-results .festival-row,
+  .solar-place-tabs button,
+  .country-pills button,
+  .arc-country-filter button,
+  .category-filter button,
+  .year-rail button,
+  .rail-group button { transition: none !important; }
+}
+
 @media (max-width: 700px) {
   .app-frame { padding-bottom: 0 !important; }
   .site-header-new { width: 100% !important; height: 60px !important; }
